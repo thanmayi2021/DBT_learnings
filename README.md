@@ -1,1 +1,2 @@
-"Just to practice dbt" 
+# DBT_learnings
+Just to practice dbt
