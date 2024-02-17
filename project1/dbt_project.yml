@@ -47,4 +47,12 @@ models:
     # Config indicated by + and applies to all files under models/mart/
     marts:
       +materialized: table
+tests:
+  project1:
+    staging:
+      +severity: warn
+    marts:
+      +severity: error
+    example:
+      +severity: warn
 
