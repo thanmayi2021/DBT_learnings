@@ -24,7 +24,7 @@ models:
                 - Returned
 
       - name: created_at
-        description: "This "
+        description: ""
 
       - name: returned_at
         description: ""
