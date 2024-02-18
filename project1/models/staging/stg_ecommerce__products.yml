@@ -17,7 +17,9 @@ models:
       - name: retail_price
         description: "How much the product retails on the online store"
         tests: 
-          - db_utils.expression_is_true :
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 100
+          - dbt_utils.expression_is_true :
               expression: "<=cost"
               where: "retail_price IS NOT NULL"
 
@@ -34,9 +36,11 @@ models:
               # quote defaults to true, but this just shows how you could set it to
               # false if you wanted to have non-string values (e.g, numbers or a TRUE/FALSE column)
               quote: true
-          - db_utils.not_empty_string:
-              trim_whitspace: false
+          - dbt_expectations.expect_column_value_lengths_to_equal:
+              value: 5
+          - dbt_utils.not_empty_string:
+              trim_whitespace: false
       - name: brand
         description: "Brand of the product"
         tests:
-        - db_utils.not_constant
+        - dbt_utils.not_constant
