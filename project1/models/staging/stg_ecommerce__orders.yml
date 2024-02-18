@@ -3,6 +3,13 @@ version: 2
 models:
   - name: stg_ecommerce__orders
     description: "yay here is my first dbt model file with test"
+    tests:
+    - dbt_utils.recency:
+        datepart: day
+        field: created_at
+        interval: 4
+    
+    
     columns:
       - name: order_id
         description: "This is the order id of each order, it has to ne unique and not null"
@@ -11,6 +18,9 @@ models:
           - unique
       - name: user_id
         description: "This column is the user id of the user"
+        tests:
+          - dbt_utils.at_least_one
+
       - name: status
         description: "This column gives the status of each order"
         tests:

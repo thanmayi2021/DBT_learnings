@@ -13,10 +13,13 @@ models:
         tests:
           - not_null
 
+
       - name: retail_price
         description: "How much the product retails on the online store"
-        tests:
-          - not_null
+        tests: 
+          - db_utils.expression_is_true :
+              expression: "<=cost"
+              where: "retail_price IS NOT NULL"
 
 
         
@@ -31,5 +34,9 @@ models:
               # quote defaults to true, but this just shows how you could set it to
               # false if you wanted to have non-string values (e.g, numbers or a TRUE/FALSE column)
               quote: true
+          - db_utils.not_empty_string:
+              trim_whitspace: false
       - name: brand
         description: "Brand of the product"
+        tests:
+        - db_utils.not_constant
